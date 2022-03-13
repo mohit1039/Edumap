@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/courseCollegeSpinner"
+        app:ms_arrowSize="20dp"
+        app:ms_floatingLabelText="Select the Course"
+        app:ms_hint="Please select your course"
+        app:ms_hintColor="@color/black"
+        app:ms_multiline="true"
+        android:popupBackground="@color/white"
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        />
+
+</RelativeLayout>

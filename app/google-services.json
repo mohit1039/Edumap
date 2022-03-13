@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "843742598098",
+    "project_id": "edumap-9151b",
+    "storage_bucket": "edumap-9151b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843742598098:android:0b5b5072739b4694b02e0b",
+        "android_client_info": {
+          "package_name": "com.edumap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "843742598098-16jo1lg1abp469hin4pua8450t6j964b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP80C8bMp4bncHRjoyDfPUvH2l3L-WaxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "843742598098-16jo1lg1abp469hin4pua8450t6j964b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
