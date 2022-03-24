@@ -4,10 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/direction_image.xml" value="0.1625" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/edit.xml" value="0.1625" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/ic_add_img.xml" value="0.1625" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.1625" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/ic_facebook.xml" value="0.163" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/ic_google_plus.xml" value="0.163" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/ic_login_hero.xml" value="0.1625" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/drawable/ic_side_bg.xml" value="0.1625" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/academiccardview.xml" value="0.25" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_add_college.xml" value="0.22" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_add_course.xml" value="0.21" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_add_event.xml" value="0.2" />
@@ -18,16 +22,24 @@
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_show_college.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_show_college_details.xml" value="0.16" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_show_college.xml" value="0.12" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_show_college_details.xml" value="0.2" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/activity_show_profile.xml" value="0.25" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/addcourse.xml" value="0.11413043478260869" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/addreview.xml" value="0.2" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/addstream.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/collegecardview.xml" value="0.22" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/coursecardview.xml" value="0.19" />
-        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/fragment_courses.xml" value="0.11413043478260869" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/eventcardview.xml" value="0.11413043478260869" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/fragment_about.xml" value="0.2" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/fragment_courses.xml" value="0.22" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/fragment_events.xml" value="0.11413043478260869" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/fragment_review.xml" value="0.25" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/maintoolbar.xml" value="0.25" />
+        <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/reviewcardview.xml" value="0.11413043478260869" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/layout/streamrecyclerlayout.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/Magician/AndroidStudioProjects/Edumap/app/src/main/res/menu/settingmenu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Magician/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.11413043478260869" />
       </map>
     </option>
   </component>

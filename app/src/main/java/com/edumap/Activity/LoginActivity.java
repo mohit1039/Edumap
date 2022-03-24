@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference ref;
     private FirebaseAuth auth;
     private ProgressDialog progressDialog;
+    String admin = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +122,10 @@ public class LoginActivity extends AppCompatActivity {
         ref.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String admin = dataSnapshot.child("admin").getValue().toString();
+                if (dataSnapshot.exists()){
+                    admin = dataSnapshot.child("admin").getValue().toString();
+                }
+
                 if (admin.equals("true")){
                     SharedPreferences settings = getApplicationContext().getSharedPreferences("Admin", MODE_PRIVATE);
                     SharedPreferences.Editor editor = settings.edit();

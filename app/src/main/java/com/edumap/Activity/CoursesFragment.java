@@ -1,7 +1,6 @@
 package com.edumap.Activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +20,7 @@ import android.widget.Toast;
 
 import com.edumap.Adapter.CourseAdapter;
 import com.edumap.Adapter.SpinAdapter;
-import com.edumap.Adapter.StreamAdapter;
-import com.edumap.AddCollegeActivity;
 import com.edumap.Model.Course;
-import com.edumap.Model.Stream;
 import com.edumap.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -44,7 +38,6 @@ public class CoursesFragment extends Fragment {
     private String collegeID;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    private FirebaseDatabase fdb;
     private CourseAdapter adapter;
     ArrayList<Course> courseArrayList = new ArrayList<>();
     ArrayList<Course> courses = new ArrayList<>();
@@ -83,7 +76,9 @@ public class CoursesFragment extends Fragment {
         registerForContextMenu(recyclerView);
         checkboxRecyclerView();
         initCourse();
-
+        if (!Common.checkAdmin(v.getContext())) {
+            addcourse.setVisibility(View.GONE);
+        }
         addcourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,25 +134,26 @@ public class CoursesFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        int position = -1;
-        position = adapter.getPosition();
-        if(item.getTitle().equals(Common.Delete)){
-            Course course = courses.get(position);
-            ArrayList<String> courseCollegeID = course.getCollegeID();
-            courseCollegeID.remove(collegeID);
-            course.setCollegeID(courseCollegeID);
-            courseRef.child(courses.get(position).getId()).setValue(course);
-            courses.clear();
-            courseArrayList.clear();
+        if (item.getGroupId() == 3) {
+            int position = -1;
+            position = adapter.getPosition();
+            if (item.getTitle().equals(Common.Delete)) {
+                Course course = courses.get(position);
+                ArrayList<String> courseCollegeID = course.getCollegeID();
+                courseCollegeID.remove(collegeID);
+                course.setCollegeID(courseCollegeID);
+                courseRef.child(courses.get(position).getId()).setValue(course);
+                courses.clear();
+                courseArrayList.clear();
+            }
         }
         return super.onContextItemSelected(item);
     }
 
     private void loaddialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
-        alertDialog.setTitle("Add new Category");
+        alertDialog.setTitle("Add new Course");
         alertDialog.setMessage("Please fill complete information");
-
         LayoutInflater inflater = this.getLayoutInflater();
         View addcategory = inflater.inflate(R.layout.addcourse,null);
 
@@ -179,7 +175,7 @@ public class CoursesFragment extends Fragment {
             }
         });
         alertDialog.setView(addcategory);
-        alertDialog.setIcon(R.drawable.ic_add_img);
+        alertDialog.setIcon(R.drawable.add);
         alertDialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

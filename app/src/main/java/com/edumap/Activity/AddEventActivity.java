@@ -26,10 +26,10 @@ import java.util.Date;
 
 public class AddEventActivity extends AppCompatActivity {
 
-    private EditText nameEditText,descEditText;
+    private EditText nameEditText;
     private FirebaseDatabase mainfdb;
     private DatabaseReference eventDataRef;
-    private String eventName,eventDesc;
+    private String eventName;
     private String updateKey;
     Event updateEvent;
     private String collegeID;
@@ -40,7 +40,6 @@ public class AddEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_event);
 
         nameEditText = findViewById(R.id.addEvent);
-        descEditText = findViewById(R.id.addEventDetails);
         mainfdb = FirebaseDatabase.getInstance();
         eventDataRef = mainfdb.getReference("Event");
 
@@ -55,7 +54,6 @@ public class AddEventActivity extends AppCompatActivity {
                             updateEvent = dataSnapshot.getValue(Event.class);
                             assert updateEvent != null;
                             nameEditText.setText(updateEvent.getName());
-                            descEditText.setText(updateEvent.getDescription());
                         }
                     }
                     @Override
@@ -71,11 +69,9 @@ public class AddEventActivity extends AppCompatActivity {
 
 
         eventName = nameEditText.getText().toString().trim();
-        eventDesc = descEditText.getText().toString().trim();
 
-
-        if (!eventName.isEmpty() &&!eventDesc.isEmpty()){
-            Event event = new Event(updateKey,eventName,eventDesc,collegeID);
+        if (!eventName.isEmpty()){
+            Event event = new Event(updateKey,eventName,collegeID);
             if (updateKey == null) {
                 updateKey = eventDataRef.push().getKey();
                 assert updateKey != null;
@@ -84,12 +80,11 @@ public class AddEventActivity extends AppCompatActivity {
             else {
                 eventDataRef.child(updateKey).setValue(event);
             }
-            startActivity(new Intent(this, ShowCollegeDetails.class));
             finish();
 
         } else {
             Snackbar snackbar = Snackbar
-                    .make(descEditText, "Enter the complete details!", Snackbar.LENGTH_LONG)
+                    .make(nameEditText, "Enter the complete details!", Snackbar.LENGTH_LONG)
                     .setAction("Ok", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

@@ -11,7 +11,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.edumap.Activity.AboutFragment;
 import com.edumap.Activity.CoursesFragment;
 import com.edumap.Activity.EventsFragment;
+import com.edumap.Activity.ReviewFragment;
 
+import java.util.ArrayList;
 public class FragmentAdapter extends FragmentStateAdapter {
 
     String collegeID;
@@ -25,21 +27,30 @@ public class FragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString("collegeID", collegeID);
         if (position == 1 ){
-            Bundle bundle = new Bundle();
-            bundle.putString("collegeID", collegeID);
             CoursesFragment fragobj = new CoursesFragment();
             fragobj.setArguments(bundle);
             return fragobj;
         }
         else if (position == 2 ){
-            return new EventsFragment();
+            EventsFragment fragobj = new EventsFragment();
+            fragobj.setArguments(bundle);
+            return fragobj;
         }
-        return new AboutFragment();
+        else if (position == 3 ){
+            ReviewFragment fragobj = new ReviewFragment();
+            fragobj.setArguments(bundle);
+            return fragobj;
+        }
+        AboutFragment aboutFragment = new AboutFragment();
+        aboutFragment.setArguments(bundle);
+        return aboutFragment;
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

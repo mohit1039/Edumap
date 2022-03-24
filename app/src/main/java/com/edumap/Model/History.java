@@ -4,6 +4,9 @@ public class History {
 
     private String historyID,year,about,collegeID;
 
+    public History() {
+    }
+
     public History(String historyID, String year, String about, String collegeID) {
         this.historyID = historyID;
         this.year = year;

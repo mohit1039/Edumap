@@ -48,13 +48,14 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.ViewHolder
         if (streamLists !=  null && streamLists.size() > 0){
             holder.streamCheckBox.setText(streamLists.get(position).getName());
 
-            if (streamListsPass.contains(streamLists.get(position).getId())) {
-                holder.streamCheckBox.setChecked(true);
+            if (streamListsPass != null){
+                if (streamListsPass.contains(streamLists.get(position).getId())) {
+                    holder.streamCheckBox.setChecked(true);
+                }
+                else{
+                    holder.streamCheckBox.setChecked(false);
+                }
             }
-            else{
-                holder.streamCheckBox.setChecked(false);
-            }
-
 
             holder.streamCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override

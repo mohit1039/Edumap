@@ -24,7 +24,7 @@ public class AddHistoryActivity extends AppCompatActivity {
 
     private EditText yearEditText,descEditText;
     private FirebaseDatabase mainfdb;
-    private DatabaseReference historyDataRef;
+    private DatabaseReference historyDataRef,collefeRef;
     private String historyYear,historyDesc;
     private String updateKey;
     History updateHistory;
@@ -39,7 +39,7 @@ public class AddHistoryActivity extends AppCompatActivity {
         descEditText = findViewById(R.id.addHistory);
         mainfdb = FirebaseDatabase.getInstance();
         historyDataRef = mainfdb.getReference("History");
-
+        collefeRef = mainfdb.getReference("College");
         if (getIntent() != null) {
             updateKey = getIntent().getStringExtra("historyID");
             collegeID = getIntent().getStringExtra("collegeID");
@@ -73,12 +73,14 @@ public class AddHistoryActivity extends AppCompatActivity {
             if (updateKey == null) {
                 updateKey = historyDataRef.push().getKey();
                 assert updateKey != null;
+                history.setHistoryID(updateKey);
                 historyDataRef.child(updateKey).setValue(history);
+                collefeRef.child(collegeID).child("historyId").setValue(updateKey);
             }
             else {
                 historyDataRef.child(updateKey).setValue(history);
+
             }
-            startActivity(new Intent(this, ShowCollegeDetails.class));
             finish();
 
         } else {

@@ -1,8 +1,10 @@
 package com.edumap.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,9 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.edumap.AddCollegeActivity;
 import com.edumap.Model.College;
 import com.edumap.Model.Stream;
 import com.edumap.R;
@@ -31,6 +33,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 public class ShowCollege extends AppCompatActivity {
 
@@ -45,11 +51,25 @@ public class ShowCollege extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private FirebaseDatabase fdb;
+    private SearchView searchView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_college);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        ActionBar supportActionBar = getSupportActionBar();
+
+        if (supportActionBar != null) {
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            supportActionBar.setDisplayShowHomeEnabled(true);
+        }
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_person_pin_24);
+        setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
         add = findViewById(R.id.floatingActionButton);
         if (!Common.checkAdmin(this)) {
@@ -61,13 +81,38 @@ public class ShowCollege extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        loaddetails();
+        fac = new FirebaseRecyclerOptions.Builder<College>().setQuery(
+                databaseReference
+                ,College.class).build();
+        loaddetails(fac);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.settingmenu, menu);
+
+        MenuItem item = menu.findItem(R.id.search);
+        searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                fac = new FirebaseRecyclerOptions.Builder<College>().setQuery(
+                        databaseReference.orderByChild("fullname").startAt(s)
+                        ,College.class).build();
+                loaddetails(fac);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                fac = new FirebaseRecyclerOptions.Builder<College>().setQuery(
+                        databaseReference.orderByChild("fullname").startAt(s)
+                        ,College.class).build();
+                loaddetails(fac);
+                return false;
+            }
+        });
         return true;
     }
 
@@ -98,6 +143,8 @@ public class ShowCollege extends AppCompatActivity {
             case R.id.course:
                 startCourseActivity();
                 return true;
+            case android.R.id.home:
+                startActivity(new Intent(this,ShowProfile.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -114,7 +161,7 @@ public class ShowCollege extends AppCompatActivity {
 
     private void loaddialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShowCollege.this);
-        alertDialog.setTitle("Add new Category");
+        alertDialog.setTitle("Add new Stream");
         alertDialog.setMessage("Please fill complete information");
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -150,15 +197,14 @@ public class ShowCollege extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void loaddetails() {
-        fac = new FirebaseRecyclerOptions.Builder<College>().setQuery(
-                databaseReference
-                ,College.class).build();
+    private void loaddetails(FirebaseRecyclerOptions<College> fac) {
+
 
         adapter = new FirebaseRecyclerAdapter<College, CollegeViewHolder>(fac) {
             @Override
             protected void onBindViewHolder(@NonNull CollegeViewHolder collegeViewHolder, int i, @NonNull College college) {
-                collegeViewHolder.collegeName.setText(college.getFullname());
+
+                collegeViewHolder.collegeName.setText(StringUtils.capitalize(college.getFullname()));
                 collegeViewHolder.setItemClickListener((view, position, isLongClick) -> {
                     Intent college1 =new Intent(ShowCollege.this,ShowCollegeDetails.class);
                     college1.putExtra("collegeID",adapter.getRef(position).getKey());
@@ -184,6 +230,11 @@ public class ShowCollege extends AppCompatActivity {
             Intent college1 =new Intent(ShowCollege.this,AddCollegeActivity.class);
             college1.putExtra("collegeID",adapter.getRef(item.getOrder()).getKey());
             startActivity(college1);
+        }
+        else {
+            if (item.getTitle().equals(Common.Delete)){
+                databaseReference.child(Objects.requireNonNull(adapter.getRef(item.getOrder()).getKey())).removeValue();
+            }
         }
         return super.onContextItemSelected(item);
     }

@@ -4,27 +4,38 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class College implements Serializable {
-    private String fullname,eventId,historyId,academyId,collegeID;
-    private float longitude, latitude;
+    private String fullname,historyId,collegeID,address,phone;
+    private double longitude, latitude;
     private ArrayList<String> streams;
 
     public College() {
     }
 
-    public College(String fullname, String eventId, String historyId, String academyId, String collegeID, float longitude, float latitude, ArrayList<String> streams) {
+
+    public College(String fullname, String historyId, String collegeID, String address, String phone, double longitude, double latitude, ArrayList<String> streams) {
         this.fullname = fullname;
-        this.eventId = eventId;
         this.historyId = historyId;
-        this.academyId = academyId;
         this.collegeID = collegeID;
+        this.address = address;
+        this.phone = phone;
         this.longitude = longitude;
         this.latitude = latitude;
         this.streams = streams;
     }
 
-    public College(String fullname, String collegeID, float longitude, float latitude, ArrayList<String> streams) {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public College(String fullname, String collegeID, String address, String phone, double longitude, double latitude, ArrayList<String> streams) {
         this.fullname = fullname;
         this.collegeID = collegeID;
+        this.address = address;
+        this.phone = phone;
         this.longitude = longitude;
         this.latitude = latitude;
         this.streams = streams;
@@ -34,17 +45,18 @@ public class College implements Serializable {
         return fullname;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
 
-    public String getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(String eventId) {
-        this.eventId = eventId;
-    }
 
     public String getHistoryId() {
         return historyId;
@@ -54,27 +66,19 @@ public class College implements Serializable {
         this.historyId = historyId;
     }
 
-    public String getAcademyId() {
-        return academyId;
-    }
-
-    public void setAcademyId(String academyId) {
-        this.academyId = academyId;
-    }
-
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

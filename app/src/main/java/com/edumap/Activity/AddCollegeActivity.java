@@ -1,4 +1,4 @@
-package com.edumap;
+package com.edumap.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,29 +13,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.edumap.Activity.ShowCollege;
-import com.edumap.Adapter.SpinAdapter;
 import com.edumap.Adapter.StreamAdapter;
 import com.edumap.Interface.StreamListener;
 import com.edumap.Model.College;
-import com.edumap.Model.Course;
 import com.edumap.Model.Stream;
+import com.edumap.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddCollegeActivity extends AppCompatActivity implements StreamListener {
     ArrayList<Stream> stream = new ArrayList<>();
     ArrayList<String> streamIds = new ArrayList<>();
-    private EditText collegeName,longEditText,latEditext;
+    private EditText collegeName,longEditText,latEditext,addressEditext,phoneEdittext;
     RecyclerView checkboxRecyclerView;
     StreamAdapter streamAdapter;
     FirebaseDatabase mainfdb;
@@ -44,6 +43,7 @@ public class AddCollegeActivity extends AppCompatActivity implements StreamListe
     private String update;
     private College updateCollege;
     String key;
+    private FloatingActionButton add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,9 @@ public class AddCollegeActivity extends AppCompatActivity implements StreamListe
         collegeName = findViewById(R.id.addCollegename);
         longEditText = findViewById(R.id.addLongitude);
         latEditext = findViewById(R.id.addLatitude);
-
+        addressEditext = findViewById(R.id.addCollegeAddress);
+        phoneEdittext = findViewById(R.id.addCollegePhone);
+        add = findViewById(R.id.addCollegeData);
         FirebaseApp.initializeApp(this);
         mainfdb = FirebaseDatabase.getInstance();
         streamData = mainfdb.getReference("Stream");
@@ -65,17 +67,22 @@ public class AddCollegeActivity extends AppCompatActivity implements StreamListe
         if (getIntent() != null) {
             update = getIntent().getStringExtra("collegeID");
             if (update != null) {
-
+                add.setEnabled(false);
                 ref.child(update).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         updateCollege = dataSnapshot.getValue(College.class);
                         if (updateCollege != null) {
-                            collegeName.setText(updateCollege.getFullname());
+                            collegeName.setText(StringUtils.capitalize(updateCollege.getFullname()));
                             longEditText.setText(String.valueOf(updateCollege.getLongitude()));
                             latEditext.setText(String.valueOf(updateCollege.getLatitude()));
-                            streamAdapter = new StreamAdapter(AddCollegeActivity.this,stream,AddCollegeActivity.this,updateCollege.getStreams());
+                            phoneEdittext.setText(String.valueOf(updateCollege.getPhone()));
+                            addressEditext.setText(updateCollege.getAddress());
+                            if (updateCollege.getStreams() != null){
+                                streamAdapter = new StreamAdapter(AddCollegeActivity.this,stream,AddCollegeActivity.this,updateCollege.getStreams());
+                            }
                             checkboxRecyclerView.setAdapter(streamAdapter);
+                            add.setEnabled(true);
                         }
                     }
 
@@ -118,21 +125,22 @@ public class AddCollegeActivity extends AppCompatActivity implements StreamListe
 
     public void savedata(){
 
-        String name = collegeName.getText().toString();
-
-
-        if (!name.isEmpty() && !longEditText.getText().toString().isEmpty() && !latEditext.getText().toString().isEmpty()){
-            float longitude = Float.valueOf(longEditText.getText().toString());
-            float latitude = Float.valueOf(latEditext.getText().toString());
+        String name = collegeName.getText().toString().trim();
+        String address = addressEditext.getText().toString().trim();
+        if (!name.isEmpty() && !address.isEmpty() && !phoneEdittext.getText().toString().isEmpty() && !longEditText.getText().toString().isEmpty() && !latEditext.getText().toString().isEmpty()){
+            double longitude = Double.parseDouble(longEditText.getText().toString());
+            double latitude = Double.parseDouble(latEditext.getText().toString());
+            String phone = phoneEdittext.getText().toString();
             if (update == null) {
                 key = ref.push().getKey();
-                College college = new College(name,key,longitude,latitude,streamIds);
+                College college = new College(name.toLowerCase(),key,address,phone,longitude,latitude,streamIds);
                 ref.child(key).setValue(college);
             }
             else {
-                College college = new College(name,updateCollege.getEventId(),updateCollege.getHistoryId(),
-                        updateCollege.getAcademyId(),key,longitude,latitude,streamIds);
                 key = update;
+                College college = new College(name.toLowerCase(),updateCollege.getHistoryId(),
+                        key,address,phone,longitude,latitude,streamIds);
+
                 ref.child(key).setValue(college);
             }
             startActivity(new Intent(this, ShowCollege.class));
@@ -157,7 +165,7 @@ public class AddCollegeActivity extends AppCompatActivity implements StreamListe
 
     @Override
     public void streamChanger(ArrayList<String> streamList) {
-        Toast.makeText(this,String.valueOf(streamList),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,String.valueOf(streamList),Toast.LENGTH_SHORT).show();
         streamIds = streamList;
     }
 }

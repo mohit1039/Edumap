@@ -12,7 +12,7 @@
         android:layout_margin="10dp"
         app:cardCornerRadius="5dp"
         android:id="@+id/cardView"
-        app:cardBackgroundColor="@color/primaryTextColor"
+        app:cardBackgroundColor="#84FFFF"
         >
 
         <RelativeLayout
@@ -31,8 +31,35 @@
                 android:maxWidth="300dp"
                 android:padding="5dp"
                 android:text="College Name"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/collegeAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/collegeName"
+                android:layout_marginTop="10dp"
+                android:autoSizeMinTextSize="15sp"
+                android:ellipsize="end"
+                android:maxWidth="300dp"
+                android:text="College Address"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/callbutton"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toLeftOf="@+id/directionButton"
+                android:clickable="true"
+                android:scaleType="center"
+                android:onClick="startCall"
+                android:tint="@color/black"
+                app:backgroundTint="@color/white"
+                app:srcCompat="@drawable/ic_baseline_call_24" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/directionButton"
@@ -42,6 +69,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="10dp"
                 android:clickable="true"
+                android:scaleType="center"
+                android:tint="@color/black"
+                app:backgroundTint="@color/white"
                 app:srcCompat="@drawable/direction_image" />
 
 

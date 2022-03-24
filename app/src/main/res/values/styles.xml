@@ -15,7 +15,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+    </style>
     <style name="viewParent.headerText">
         <item name="android:textColor">@color/contentTextColor</item>
         <item name="android:textSize">@dimen/headerTextSize</item>

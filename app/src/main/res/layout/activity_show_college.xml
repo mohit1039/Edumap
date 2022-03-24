@@ -5,25 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ShowCollege">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_margin="0dp"
+        app:layout_scrollFlags="snap"
+        app:navigationIcon="@drawable/add"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/showCollegeRecycler"
         android:layout_margin="10dp"
         />
+</LinearLayout>
+
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="20dp"
-        app:backgroundTintMode="add"
+        android:layout_marginBottom="20dp"
+        android:onClick="add"
         app:backgroundTint="@color/white"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:onClick="add"/>
+        app:backgroundTintMode="add"
+        android:scaleType="fitXY"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 </RelativeLayout>

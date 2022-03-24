@@ -75,7 +75,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.ViewHolde
         @Override
         public void onCreateContextMenu(ContextMenu contextMenu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             contextMenu.setHeaderTitle("Select the action");
-            contextMenu.add(0,0,getAdapterPosition(), Common.Delete);
+            contextMenu.add(3,0,getAdapterPosition(), Common.Delete);
         }
     }
 }

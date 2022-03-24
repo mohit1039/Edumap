@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Edumap">
+        <activity
+            android:name=".Activity.ShowProfile"
+            android:exported="false" />
         <activity
             android:name=".Activity.AddHistoryActivity"
             android:exported="false" />
@@ -28,14 +32,15 @@
             android:name=".Activity.AddEventActivity"
             android:exported="false" />
         <activity
-            android:name=".AddCollegeActivity"
+            android:name=".Activity.AddCollegeActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ForgotPassword"
             android:exported="false" />
         <activity
             android:name=".Activity.ShowCollege"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.LoginActivity"
             android:exported="false" />

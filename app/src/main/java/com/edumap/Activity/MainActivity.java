@@ -23,24 +23,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_main);
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (Common.isConnectedtoInternet(MainActivity.this)) {
-                    auth = FirebaseAuth.getInstance();
-                    if (auth.getCurrentUser() != null) {
-                        startActivity(new Intent(MainActivity.this, ShowCollege.class));
-                        finish();
-                    } else {
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        finish();
-                    }
+        handler.postDelayed(() -> {
+            if (Common.isConnectedtoInternet(MainActivity.this)) {
+                auth = FirebaseAuth.getInstance();
+                if (auth.getCurrentUser() != null) {
+                    startActivity(new Intent(MainActivity.this, ShowCollege.class));
+                    finish();
                 } else {
-                    Toast.makeText(MainActivity.this, "Please check your Intenet Connection", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
                 }
+            } else {
+                Toast.makeText(MainActivity.this, "Please check your Intenet Connection", Toast.LENGTH_LONG).show();
             }
         }, 2000);
     }

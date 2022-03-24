@@ -1,15 +1,14 @@
 package com.edumap.Model;
 
 public class Event {
-    private String eventID,name,description, collegeID;
+    private String eventID,name, collegeID;
 
     public Event() {
     }
 
-    public Event(String eventID, String name, String description, String collegeID) {
+    public Event(String eventID, String name, String collegeID) {
         this.eventID = eventID;
         this.name = name;
-        this.description = description;
         this.collegeID = collegeID;
     }
 
@@ -28,14 +27,6 @@ public class Event {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getCollegeID() {

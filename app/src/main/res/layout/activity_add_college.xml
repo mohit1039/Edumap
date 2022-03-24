@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddCollegeActivity">
+    tools:context=".Activity.AddCollegeActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,6 +34,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:hint="College Name" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/addCollegeAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="College addres" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/addCollegePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Phone number"
+                    android:inputType="phone"
+                    android:maxLength="10"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -92,9 +118,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:id="@+id/addCollegeData"
         android:background="@drawable/ic_baseline_navigate_next_24"
-        app:backgroundTint="@color/white"
         android:onClick="add"
-        />
+        app:backgroundTint="@color/white" />
 
 </RelativeLayout>
